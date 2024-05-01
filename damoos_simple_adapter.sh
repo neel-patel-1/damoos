@@ -18,10 +18,10 @@ function pr_usage {
 	echo
 }
 
+adapter="simple_adapter"
 scheme_adapters=$(ls "$DAMOOS/scheme_adapters")
 adapter_dir="$DAMOOS/scheme_adapters/$adapter"
 adapter_requirements=$(cat "$adapter_dir/requirements.txt")
-adapter="simple_adapter"
 
 cmd=""
 log_file=$1
