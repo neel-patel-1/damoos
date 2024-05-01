@@ -7,6 +7,17 @@
 
 DAMOOS=$(dirname "$0")
 
+if [ $# -lt 1 ]
+then
+	pr_usage
+	exit 1
+fi
+
+function pr_usage {
+	echo "Usage: $0 <log file> <workload> <Runtime_Importance_Score>"
+	echo
+}
+
 scheme_adapters=$(ls "$DAMOOS/scheme_adapters")
 adapter_dir="$DAMOOS/scheme_adapters/$adapter"
 adapter_requirements=$(cat "$adapter_dir/requirements.txt")
