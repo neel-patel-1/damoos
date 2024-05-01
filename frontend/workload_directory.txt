@@ -1,6 +1,9 @@
 # Make sure the command runs in background and should return immediately after running the workload.
 ShortName@@@NameforPID@@@Command
 
+stairs@@@masim@@@bash -c "/home/shared/masim/masim /home/shared/damon-tests/perf/masim_patterns/stairs.cfg" 2>&1 &
+fast@@@masim@@@bash -c "/home/shared/masim/masim /home/shared/damon-tests/perf/masim_patterns/fast.cfg" 2>&1 &
+
 blackscholes@@@blackscholes@@@bash /home/dev4/parsec3_on_ubuntu/run.sh blackscholes > /dev/null 2>&1 &
 bodytrack@@@bodytrack@@@bash /home/dev4/parsec3_on_ubuntu/run.sh bodytrack > /dev/null 2>&1 &
 canneal@@@canneal@@@bash /home/dev4/parsec3_on_ubuntu/run.sh canneal > /dev/null 2>&1 &

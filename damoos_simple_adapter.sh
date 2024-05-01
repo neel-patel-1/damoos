@@ -8,55 +8,20 @@
 DAMOOS=$(dirname "$0")
 
 scheme_adapters=$(ls "$DAMOOS/scheme_adapters")
-
-
-if [ $# -lt 1 ]
-then
-	echo "$0 log_file"
-	exit 1
-fi
-
-while [ $# -ne 0 ]; do
-	case $1 in
-	"--dry")
-		DRYRUN=echo
-		shift 1
-		continue
-		;;
-	*)
-		if [ $# -ne 1 ]
-		then
-			pr_usage
-			exit 1
-		fi
-		log_file=$1
-
-		break
-		;;
-	esac
-done
-
 adapter_dir="$DAMOOS/scheme_adapters/$adapter"
 adapter_requirements=$(cat "$adapter_dir/requirements.txt")
 adapter="simple_adapter"
 
 cmd=""
-Workload_Name=$3
+log_file=$1
 [ -z "${Workload_Name}" ] && Workload_Name="stairs"
-Runtime_Importance_Score=$4
+Workload_Name=$2
+[ -z "${Workload_Name}" ] && Workload_Name="stairs"
+Runtime_Importance_Score=$3
 [ -z "${Runtime_Importance_Score}" ] && Runtime_Importance_Score=0.3
 Lazybox_Path="/home/shared/lazybox"
 
-if [[ "$adapter" == "simple_adapter" ]]
-then
-	cmd="sudo DAMOOS=\"$DAMOOS\" bash \"scheme_adapters/simple_adapter/simple_adapter.sh\" $Workload_Name $Runtime_Importance_Score $Lazybox_Path"
-fi
-
-if [ "$cmd" == "" ]
-then
-	echo "something wrong!"
-	exit 1
-fi
+cmd="sudo DAMOOS=\"$DAMOOS\" bash \"scheme_adapters/simple_adapter/simple_adapter.sh\" $Workload_Name $Runtime_Importance_Score $Lazybox_Path"
 
 if $DRYRUN script -c "$cmd" -f "$log_file"
 then
